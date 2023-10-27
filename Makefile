@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/10/27 18:16:10 by migmanu          ###   ########.fr        #
+#    Updated: 2023/10/27 18:18:52 by migmanu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = main.c \
 
 OBJ_FILES = $(addprefix $(SRCS_DIR), $(SRCS:.c=.o))
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -pthread -Wall -Werror -Wextra -g
 
 # COMPILATION
 NAME = so_long
