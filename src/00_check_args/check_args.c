@@ -6,13 +6,13 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 19:35:17 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/27 19:42:51 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/philosophers.h"
 
-int	check_str(int argc, char *argv[])
+static int	check_str(int argc, char *argv[])
 {
 	int	i;
 	int	c;
@@ -35,6 +35,23 @@ int	check_str(int argc, char *argv[])
 	return (0);
 }
 
+static int	check_values(int argc, char *argv[])
+{
+	int	i;
+
+	i = 1;
+	while (i < (argc - 1))
+	{
+		if (ft_atoi(argv[i]) < 1)
+		{
+			printf("Only number of times philosophers eat can be 0!\n");
+			return (ERROR);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	check_args(int argc, char *argv[])
 {
 	if (argc < 4 || argc > 5)
@@ -43,6 +60,10 @@ int	check_args(int argc, char *argv[])
 		exit(ERROR);
 	}
 	if (check_str(argc, argv) != 0)
+	{
+		exit(ERROR);
+	}
+	if (check_values(argc, argv) != 0)
 	{
 		exit(ERROR);
 	}
