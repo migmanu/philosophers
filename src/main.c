@@ -6,11 +6,14 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 18:17:09 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/27 18:39:26 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "../include/philosophers.h"
+
+int	main(int argc, char *argv[])
 {
+	check_args(argc, argv);
 	return (0);
 }
