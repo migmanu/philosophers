@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 18:46:01 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/27 19:26:20 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ int	check_args(int argc, char *argv[]);
 /****************	10_utils	****************/
 // ft_atoi.c
 int	ft_atoi(const char *str);
+int	type_check(char c);
 #endif
