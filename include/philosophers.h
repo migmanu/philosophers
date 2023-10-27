@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 19:26:20 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/27 20:10:30 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@
 # define ERROR -1
 # define FAILURE 1
 # define SUCCESS 0
+
+typedef struct s_philos
+{
+	pthread_t		thread;
+	int				id;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
+}	t_philos;
+
+typedef struct s_data
+{
+	int		nbr_philos;
+	int		nbr_times_to_eat;
+	int		*dead;
+	size_t	die_time;
+	size_t	eat_time;
+	size_t	sleep_time;
+}	t_data;
 
 /****************	00_check_args	****************/
 // check_args.c
