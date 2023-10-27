@@ -6,15 +6,16 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/10/27 18:21:52 by migmanu          ###   ########.fr        #
+#    Updated: 2023/10/27 19:02:45 by migmanu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
-SRCS_DIR = ./src/
-SRCS = main.c \
+SRCS_DIR = ./src
+SRCS = $(wildcard $(SRCS_DIR)/*/*.c)
+SRCS += $(wildcard $(SRCS_DIR)/main.c)
 
-OBJ_FILES = $(addprefix $(SRCS_DIR), $(SRCS:.c=.o))
+OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
 
 CFLAGS = -pthread -Wall -Werror -Wextra -g
 
