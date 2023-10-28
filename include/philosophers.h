@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 20:10:30 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/28 20:42:01 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ typedef struct s_data
 	size_t	sleep_time;
 }	t_data;
 
-/****************	00_check_args	****************/
 // check_args.c
 int	check_args(int argc, char *argv[]);
-/****************	10_utils	****************/
 // ft_atoi.c
 int	ft_atoi(const char *str);
 int	type_check(char c);

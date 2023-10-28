@@ -6,11 +6,11 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/27 19:42:51 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/28 20:40:38 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../include/philosophers.h"
 
 static int	check_str(int argc, char *argv[])
 {

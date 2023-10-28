@@ -6,11 +6,11 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:31:23 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/10/27 19:26:13 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/28 20:40:48 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/philosophers.h"
+#include "../include/philosophers.h"
 
 int	type_check(char c)
 {
