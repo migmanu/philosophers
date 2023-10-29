@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/28 20:42:01 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/29 17:36:24 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ typedef struct s_philos
 
 typedef struct s_data
 {
-	int		nbr_philos;
-	int		nbr_times_to_eat;
-	int		*dead;
-	size_t	die_time;
-	size_t	eat_time;
-	size_t	sleep_time;
+	t_philos	philos[200];
+	int			nbr_philos;
+	size_t		die_time;
+	size_t		eat_time;
+	size_t		sleep_time;
+	int			nbr_times_to_eat;
+	int			*dead;
 }	t_data;
 
 // check_args.c
@@ -51,4 +52,6 @@ int	check_args(int argc, char *argv[]);
 // ft_atoi.c
 int	ft_atoi(const char *str);
 int	type_check(char c);
+// initiate_data.c
+void	initiate_data(t_data *data, char *argv[]);
 #endif
