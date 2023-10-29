@@ -6,13 +6,12 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/29 18:24:30 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/29 19:10:25 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
-# include <bits/pthreadtypes.h>
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -23,6 +22,7 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <string.h>
+# include <pthread.h>
 
 # define ERROR -1
 # define FAILURE 1
@@ -56,4 +56,6 @@ int		ft_atoi(const char *str);
 int		type_check(char c);
 // initiate_data.c
 void	initiate_data(t_data *data, char *argv[]);
+// start_threads.c
+void	start_threads(t_data *data);
 #endif

@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/29 17:36:57 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/29 19:09:25 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ int	main(int argc, char *argv[])
 
 	check_args(argc, argv);
 	initiate_data(&data, argv);
+	start_threads(&data);
 	return (0);
 }

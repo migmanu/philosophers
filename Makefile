@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/10/28 20:39:17 by migmanu          ###   ########.fr        #
+#    Updated: 2023/10/29 19:05:29 by migmanu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = $(wildcard $(SRCS_DIR)/*.c)
 
 OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
 
-CFLAGS = -pthread -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 
 # COMPILATION
 NAME = philosophers
