@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:37:26 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 19:59:42 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:13:57 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	initiate_philos(t_data *data)
 {
-	printf("initiate_philos init, nbr_philos: %d\n", data->nbr_philos);
 	int	i;
 
 	i = 0;

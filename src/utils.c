@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 21:06:48 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:14:55 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	get_time(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
@@ -34,4 +34,3 @@ void	ft_usleep(size_t time)
 	}
 	return ;
 }
-
