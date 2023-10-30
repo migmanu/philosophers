@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 21:03:04 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:10:10 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	eat(t_philos *philo)
 	pthread_mutex_unlock(philo->eating);
 	pthread_mutex_unlock(philo->l_fork);
 	printf("%lu | philo nbr %d drop their left fork\n",
-		get_time() , philo->id);
+	get_time() , philo->id);
 	pthread_mutex_unlock(philo->r_fork);
 	printf("%lu | philo nbr %d drop their right fork\n",
-		get_time() , philo->id);
+	get_time() , philo->id);
 }
