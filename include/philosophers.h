@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/29 19:10:25 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:13:14 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_philos
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	size_t			die_time;
+	size_t			eat_time;
+	size_t			sleep_time;
+	int				nbr_times_to_eat;
 }	t_philos;
 
 typedef struct s_data
@@ -49,6 +53,10 @@ typedef struct s_data
 	int				dead;
 }	t_data;
 
+// actions.c
+void	think(t_philos philo);
+void	p_sleep(t_philos philo);
+void	eat(t_philos philo);
 // check_args.c
 int		check_args(int argc, char *argv[]);
 // ft_atoi.c
