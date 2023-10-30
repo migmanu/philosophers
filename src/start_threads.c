@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/29 19:28:41 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:07:38 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,17 @@ void	*philo_routine(void *ptr)
 {
 	t_philos *philo;
 
+	// TODO: check philo life
 	philo = (t_philos *)ptr;
+	usleep(10 * philo->id); // TODO: check!
+	pthread_mutex_lock(philo->l_fork);
+	printf("philo nbr %d locked their left fork\n", philo->id);
+	pthread_mutex_lock(philo->r_fork);
+	printf("philo nbr %d locked their right fork\n", philo->id);
+	pthread_mutex_unlock(philo->l_fork);
+	printf("philo nbr %d unlocked their left fork\n", philo->id);
+	pthread_mutex_unlock(philo->r_fork);
+	printf("philo nbr %d unlocked their right fork\n", philo->id);
 	return (ptr);
 }
 
@@ -31,7 +41,16 @@ void	start_threads(t_data *data)
 					&philo_routine,
 					&(data->philos[i])) != 0)
 		{
-
+			printf("thread create error!\n"); // TODO: error handling
+		}
+		i++;
+	}
+	i = 0;
+	while (i < data->nbr_philos)
+	{
+		if (pthread_join(data->philos[i].thread, NULL) != 0)
+		{
+			printf("thread create error!\n"); // TODO: error handling
 		}
 		i++;
 	}
