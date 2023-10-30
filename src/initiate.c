@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:37:26 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/29 19:16:47 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:09:59 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,17 @@ void	initiate_philos(t_data *data)
 		data->philos[i].l_fork = &(data->forks[i]);
 		if (i == 0)
 		{
-			data->philos[i].l_fork = &(data->forks[data->nbr_philos - 1]);
+			data->philos[i].r_fork = &(data->forks[data->nbr_philos - 1]);
 		}
 		else
 		{
-			data->philos[i].l_fork = &(data->forks[i - 1]);
+			data->philos[i].r_fork = &(data->forks[i - 1]);
 		}
 		data->philos[i].dead = &(data->dead);
+		data->philos[i].die_time = data->die_time;
+		data->philos[i].eat_time = data->eat_time;
+		data->philos[i].sleep_time = data->sleep_time;
+		data->philos[i].nbr_times_to_eat = data->nbr_times_to_eat;
 		i++;
 	}
 }
