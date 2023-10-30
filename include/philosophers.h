@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 19:58:26 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 20:43:57 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 # include <unistd.h>
 # include <sys/types.h>
+# include <sys/time.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
@@ -68,4 +69,7 @@ int		type_check(char c);
 void	initiate_data(t_data *data, char *argv[]);
 // start_threads.c
 void	start_threads(t_data *data);
+// utils.c
+size_t	get_time(void);
+void	ft_usleep(size_t time);
 #endif
