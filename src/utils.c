@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 20:46:01 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:06:48 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	get_time(void)
 	{
 		printf("error in time!\n"); // TODO: handle error
 	}
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 void	ft_usleep(size_t time)
@@ -30,7 +30,7 @@ void	ft_usleep(size_t time)
 	start = get_time();
 	while ((get_time() - start) < time)
 	{
-		usleep(500);
+		usleep(100);
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 20:44:25 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/10/30 20:53:57 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*philo_routine(void *ptr)
 
 	philo = (t_philos *)ptr;
 	if (philo->id % 2 == 0)
-		ft_usleep(10); // TODO: check!
+		ft_usleep(1); // TODO: check!
 	while (*(philo->dead) != 1)
 	{
 		// TODO: check philo life
