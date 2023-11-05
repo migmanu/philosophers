@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 18:34:16 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:04:26 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	check_args(int argc, char *argv[])
 {
 	if (argc < 5 || argc > 6)
 	{
-		printf("Inputed %d arguments. Must use 3 or 4\n", argc - 1);
+		printf("Inputed %d arguments. Must use 4 or 5\n", argc - 1);
 		exit(ERROR);
 	}
 	if (check_str(argc, argv) != 0)
