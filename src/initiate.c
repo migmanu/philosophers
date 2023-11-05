@@ -6,11 +6,12 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:37:26 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 17:19:56 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/05 19:42:09 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
+#include <limits.h>
 
 void	initiate_philos(t_data *data)
 {
@@ -55,7 +56,7 @@ void	initiate_mutex(t_data *data)
 	}
 }
 
-void	initiate_data(t_data *data, char *argv[])
+void	initiate_data(t_data *data, int argc, char *argv[])
 {
 	printf("initiate_data init\n");
 	data->nbr_philos = ft_atoi(argv[1]);
@@ -66,8 +67,9 @@ void	initiate_data(t_data *data, char *argv[])
 	{
 		printf("mutex init error!\n"); // TODO: error management
 	}
-	if (argv[5])
-		data->nbr_times_to_eat = ft_atoi(argv[4]);
+	data->nbr_times_to_eat = INT_MAX;
+	if (argc == 6)
+		data->nbr_times_to_eat = ft_atoi(argv[5]);
 	data->dead = 0;
 	initiate_mutex(data);
 	initiate_philos(data);
