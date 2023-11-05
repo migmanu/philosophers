@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 21:18:13 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:10:50 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	hold_forks(t_philos *philo)
 	{
 		pthread_mutex_lock(philo->l_fork);
 		printf("%lu | philo nbr %d took their left fork\n",
-				get_time(), philo->id);
+			get_time(), philo->id);
 		pthread_mutex_lock(philo->r_fork);
 		printf("%lu | philo nbr %d took their right fork\n",
-				get_time(), philo->id);
+			get_time(), philo->id);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->r_fork);
 		printf("%lu | philo nbr %d took their right fork\n",
-				get_time(), philo->id);
+			get_time(), philo->id);
 		pthread_mutex_lock(philo->l_fork);
 		printf("%lu | philo nbr %d took their left fork\n",
-				get_time(), philo->id);
+			get_time(), philo->id);
 	}
 }
 
