@@ -6,11 +6,24 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 21:11:01 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:42:32 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
+
+void	check_starved(t_philos *philo)
+{
+	size_t	curr_time;
+
+	curr_time = get_time();
+	if (curr_time - philo->last_meal > philo->die_time)
+	{
+		*(philo->dead) = 1;
+		printf("%lu | philo nbr %d died! \n",
+			get_time(), philo->id);
+	}
+}
 
 void	*philo_routine(void *ptr)
 {
@@ -21,9 +34,13 @@ void	*philo_routine(void *ptr)
 		ft_usleep(1); // TODO: check!
 	while (*(philo->dead) != 1)
 	{
-		// TODO: check philo life
+		check_starved(philo);
+		if (*(philo->dead) == 1)
+			return (ptr);
 		eat(philo);
 		p_sleep(*philo);
+		if (*(philo->dead) == 1)
+			return (ptr);
 		think(*philo);
 	}
 	return (ptr);

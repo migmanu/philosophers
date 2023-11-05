@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/10/30 20:43:57 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/05 17:17:49 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_philos
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
+	size_t			last_meal;
+	int				meals;
 	int				nbr_times_to_eat;
 }	t_philos;
 
