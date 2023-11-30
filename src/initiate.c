@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   initiate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/29 16:37:26 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/30 16:44:30 by jmigoya-         ###   ########.fr       */
+/*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/30 21:05:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-#include <limits.h>
 
-void	initiate_philos(t_data *data)
+void	initiate_philos(t_data *data, int argc, char *argv[], int i)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->nbr_philos)
+	while (++i < data->nbr_philos)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].l_fork = &(data->forks[i]);
@@ -30,14 +26,15 @@ void	initiate_philos(t_data *data)
 		{
 			data->philos[i].r_fork = &(data->forks[i + 1]);
 		}
+		data->philos[i].nbr_times_to_eat = INT_MAX;
+		if (argc == 6)
+			data->philos[i].nbr_times_to_eat = ft_atoi(argv[5]);
 		data->philos[i].dead = &(data->dead);
-		data->philos[i].die_time = data->die_time;
-		data->philos[i].eat_time = data->eat_time;
-		data->philos[i].sleep_time = data->sleep_time;
-		data->philos[i].nbr_times_to_eat = data->nbr_times_to_eat;
+		data->philos[i].die_time = ft_atoi(argv[2]);
+		data->philos[i].eat_time = ft_atoi(argv[3]);
+		data->philos[i].sleep_time = ft_atoi(argv[4]);
 		data->philos[i].eating = &(data->eating);
 		data->philos[i].last_meal = get_time();
-		i++;
 	}
 }
 
@@ -58,19 +55,12 @@ void	initiate_mutex(t_data *data)
 
 void	initiate_data(t_data *data, int argc, char *argv[])
 {
-	printf("initiate_data init\n");
 	data->nbr_philos = ft_atoi(argv[1]);
-	data->die_time = ft_atoi(argv[2]);
-	data->eat_time = ft_atoi(argv[3]);
-	data->sleep_time = ft_atoi(argv[4]);
 	if (pthread_mutex_init(&(data->eating), NULL) != 0)
 	{
 		printf("mutex init error!\n"); // TODO: error management
 	}
-	data->nbr_times_to_eat = INT_MAX;
-	if (argc == 6)
-		data->nbr_times_to_eat = ft_atoi(argv[5]);
 	data->dead = 0;
 	initiate_mutex(data);
-	initiate_philos(data);
+	initiate_philos(data, argc, argv, -1);
 }

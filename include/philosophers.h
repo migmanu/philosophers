@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/30 19:37:45 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2023/11/30 21:05:49 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,10 @@ typedef struct s_philos
 
 typedef struct s_data
 {
-	t_philos		philos[200];
-	pthread_mutex_t	forks[200];
+	t_philos		philos[201];
+	pthread_mutex_t	forks[201];
 	pthread_mutex_t	eating;
 	int				nbr_philos;
-	size_t			die_time;
-	size_t			eat_time;
-	size_t			sleep_time;
-	int				nbr_times_to_eat;
 	int				dead;
 }	t_data;
 
@@ -85,6 +81,8 @@ int		type_check(char c);
 void	initiate_data(t_data *data, int argc, char *argv[]);
 // start_threads.c
 void	start_threads(t_data *data);
+// monitor.c
+void	*monitor_routine(void *ptr);
 // utils.c
 size_t	get_time(void);
 void	ft_usleep(size_t time);
