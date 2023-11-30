@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 19:41:01 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/30 19:43:03 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void	check_starved(t_philos *philo)
 	if (curr_time - philo->last_meal > philo->die_time)
 	{
 		*(philo->dead) = 1;
+		printf(RED);
 		printf("%lu | %d died! \n",
 			get_time(), philo->id);
+		printf(DEFAULT);
 	}
 }
 

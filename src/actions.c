@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 19:43:59 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/30 19:44:56 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	think(t_philos philo)
 
 void	p_sleep(t_philos philo)
 {
+	printf(BLUE);
 	printf("%lu | %d is sleeping\n", get_time(), philo.id);
+	printf(DEFAULT);
 	ft_usleep(philo.sleep_time);
 }
 
@@ -49,7 +51,9 @@ void	eat(t_philos *philo)
 {
 	hold_forks(philo);
 	pthread_mutex_lock(philo->eating);
+	printf(GREEN);
 	printf("%lu | %d is eating\n", get_time(), philo->id);
+	printf(DEFAULT);
 	ft_usleep(philo->eat_time);
 	philo->last_meal = get_time();
 	philo->meals++;

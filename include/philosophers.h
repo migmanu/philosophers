@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 19:37:39 by migmanu          ###   ########.fr       */
+/*   Updated: 2023/11/30 19:37:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,23 @@
 # include <string.h>
 # include <pthread.h>
 
-# define ERROR -1
-# define FAILURE 1
-# define SUCCESS 0
+# define DEFAULT "\001\033[0;39m\002"
+# define GRAY "\001\033[1;90m\002"
+# define BLACK "\001\033[0;30m\002"
+# define RED "\001\033[1;91m\002"
+# define GREEN "\001\033[1;92m\002"
+# define YELLOW "\001\033[1;93m\002"
+# define BLUE "\001\033[1;94m\002"
+# define MAGENTA "\001\033[1;95m\002"
+# define CYAN "\001\033[1;96m\002"
+# define WHITE "\001\033[1;97m\002"
+
+enum	e_returns
+{
+	ERROR = -1,
+	SUCCESS,
+	FAILURE,
+};
 
 typedef struct s_philos
 {
