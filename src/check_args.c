@@ -35,12 +35,12 @@ static int	check_str(int argc, char *argv[])
 	return (0);
 }
 
-static int	check_values(int argc, char *argv[])
+static int	check_values(char *argv[])
 {
 	int	i;
 
 	i = 1;
-	while (i < (argc - 1))
+	while (i < 4)
 	{
 		if (ft_atoi(argv[i]) < 1)
 		{
@@ -63,7 +63,7 @@ int	check_args(int argc, char *argv[])
 	{
 		exit(ERROR);
 	}
-	if (check_values(argc, argv) != 0)
+	if (check_values(argv) != 0)
 	{
 		exit(ERROR);
 	}
