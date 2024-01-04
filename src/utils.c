@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 19:38:01 by migmanu          ###   ########.fr       */
+/*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
+/*   Updated: 2023/10/30 21:14:55 by migmanu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	main(int argc, char *argv[])
+size_t	get_time(void)
 {
-	t_data	data;
+	struct timeval	time;
 
-	check_args(argc, argv);
-	initiate_data(&data, argc, argv);
-	start_threads(&data);
-	return (0);
+	if (gettimeofday(&time, NULL) == -1)
+	{
+		printf("error in time!\n"); // TODO: handle error
+	}
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_usleep(size_t time)
+{
+	size_t	start;
+
+	start = get_time();
+	while ((get_time() - start) < time)
+	{
+		usleep(100);
+	}
+	return ;
 }

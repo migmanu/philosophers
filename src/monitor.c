@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 19:38:01 by migmanu          ###   ########.fr       */
+/*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
+/*   Updated: 2023/11/30 20:55:43 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	main(int argc, char *argv[])
+void	*monitor_routine(void *ptr)
 {
-	t_data	data;
+	t_philos	*philo;
 
-	check_args(argc, argv);
-	initiate_data(&data, argc, argv);
-	start_threads(&data);
-	return (0);
+	philo = (t_philos *)ptr;
+	printf("%d\n", philo->id);
+	return (ptr);
 }
