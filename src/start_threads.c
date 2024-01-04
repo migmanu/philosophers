@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/30 19:54:36 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/04 19:36:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ void	start_threads(t_data *data)
 		}
 		i++;
 	}
-	pthread_create(&(data->philos[201].thread), NULL, &monitor_routine,
-		&(data->philos[201])); // TODO: error handling
+	pthread_create(&(data->philos[200].thread), NULL, &monitor_routine,
+		&(data->philos[200])); // TODO: error handling
 	i = 0;
 	while (i < data->nbr_philos)
 	{
 		if (pthread_join(data->philos[i++].thread, NULL) != 0)
 			printf("thread create error!\n"); // TODO: error handling
 	}
-	pthread_join(data->philos[201].thread, NULL); // TODO: error handling
+	pthread_join(data->philos[200].thread, NULL); // TODO: error handling
 }
