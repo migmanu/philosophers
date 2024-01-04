@@ -6,12 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:31:23 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/10/30 20:43:34 by migmanu          ###   ########.fr       */
+/*   Updated: 2024/01/04 19:45:40 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
+// returns: 1 if is digit, 2 if is '-', 3 if is space, else 0
 int	type_check(char c)
 {
 	int	a;
