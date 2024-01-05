@@ -6,23 +6,26 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/30 19:44:56 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:54:10 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	think(t_philos philo)
+void	think(t_philos *philo)
 {
-	printf("%lu | %d is thinking\n", get_time(), philo.id);
+	if (*(philo->dead) == 1)
+		return ;
+	print_message(philo, "is thinking", NULL);
 }
 
-void	p_sleep(t_philos philo)
+void	p_sleep(t_philos *philo)
 {
-	printf(BLUE);
-	printf("%lu | %d is sleeping\n", get_time(), philo.id);
-	printf(DEFAULT);
-	ft_usleep(philo.sleep_time);
+	if (*(philo->dead) == 1)
+		return ;
+	print_message(philo, "is sleeping", BLUE);
+	ft_usleep(philo->sleep_time);
+	print_message(philo, "finished sleeping", MAGENTA);
 }
 
 void	hold_forks(t_philos *philo)
@@ -30,38 +33,41 @@ void	hold_forks(t_philos *philo)
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->l_fork);
-		printf("%lu | %d took their left fork\n",
-			get_time(), philo->id);
+		if (*(philo->dead) == 1)
+			return ;
+		print_message(philo, "took their left fork", NULL);
 		pthread_mutex_lock(philo->r_fork);
-		printf("%lu | %d took their right fork\n",
-			get_time(), philo->id);
+		if (*(philo->dead) == 1)
+			return ;
+		print_message(philo, "took their right fork", NULL);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->r_fork);
-		printf("%lu | %d took their right fork\n",
-			get_time(), philo->id);
+		if (*(philo->dead) == 1)
+			return ;
+		print_message(philo, "took their right fork", NULL);
 		pthread_mutex_lock(philo->l_fork);
-		printf("%lu | %d took their left fork\n",
-			get_time(), philo->id);
+		if (*(philo->dead) == 1)
+			return ;
+		print_message(philo, "took their left fork", NULL);
 	}
 }
 
 void	eat(t_philos *philo)
 {
 	hold_forks(philo);
-	pthread_mutex_lock(philo->eating);
-	printf(GREEN);
-	printf("%lu | %d is eating\n", get_time(), philo->id);
-	printf(DEFAULT);
-	ft_usleep(philo->eat_time);
+	pthread_mutex_lock(&(philo->eating));
+	if (*(philo->dead) == 1)
+		return ;
+	print_message(philo, "is eating", GREEN);
 	philo->last_meal = get_time();
+	ft_usleep(philo->eat_time);
+	print_message(philo, "ate", CYAN);
 	philo->meals++;
-	pthread_mutex_unlock(philo->eating);
+	pthread_mutex_unlock(&(philo->eating));
 	pthread_mutex_unlock(philo->l_fork);
-	printf("%lu | %d drop their left fork\n",
-		get_time(), philo->id);
+	print_message(philo, "drop their left fork", NULL);
 	pthread_mutex_unlock(philo->r_fork);
-	printf("%lu | %d drop their right fork\n",
-		get_time(), philo->id);
+	print_message(philo, "drop their right fork", NULL);
 }

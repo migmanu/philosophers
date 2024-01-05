@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2023/11/30 20:55:43 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:48:54 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,28 @@
 
 void	*monitor_routine(void *ptr)
 {
-	t_philos	*philo;
+	size_t	curr_time;
+	t_data	*data;
+	int		i;
 
-	philo = (t_philos *)ptr;
-	printf("%d\n", philo->id);
+	data = (t_data *)ptr;
+	i = 1;
+	while (data->dead != 1)
+	{
+		//pthread_mutex_lock(&(data->philos[i].eating));
+		curr_time = get_time();
+		if (curr_time - data->philos[i].last_meal > data->philos[i].die_time)
+		{
+			data->dead = 1;
+			print_message(&(data->philos[i]), "died!", RED);
+			ft_usleep(1);
+			//pthread_mutex_unlock(&(data->philos[i]).eating);
+			return (NULL);
+		}
+		//pthread_mutex_unlock(&(data->philos[i].eating));
+		i++;
+		if (i == data->nbr_philos)
+			i = 1;
+	}
 	return (ptr);
 }
