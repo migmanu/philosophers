@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:31:23 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/04 19:45:40 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:01:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,3 @@ int	ft_atoi(const char *str)
 		result = (result * 10) + (str[i++] - '0');
 	return (result * sign);
 }
-/*
-int	main(void)
-{
-	char	*nptr = "\t\n\r\v\f  469 \n";
-	printf("original:%d\n\n", atoi(nptr));
-	printf("copy:%d", ft_atoi(nptr));
-
-	return (0);
-}*/

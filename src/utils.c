@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 18:38:36 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:02:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ size_t	get_time(void)
 
 	if (gettimeofday(&time, NULL) == -1)
 	{
-		printf("error in time!\n"); // TODO: handle error
+		printf("error in time external function!\n");
+		return (0);
 	}
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }

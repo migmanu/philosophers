@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/05 19:58:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:06:18 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*philo_routine(void *ptr)
 	return (ptr);
 }
 
-void	start_threads(t_data *data)
+int	start_threads(t_data *data)
 {
 	int			i;
 	pthread_t	monitor;
@@ -40,22 +40,18 @@ void	start_threads(t_data *data)
 	i = 0;
 	while (i < data->nbr_philos)
 	{
-		if (pthread_create(&(data->philos[i].thread), NULL,
-				&philo_routine,
+		if (pthread_create(&(data->philos[i].thread), NULL, &philo_routine,
 				&(data->philos[i])) != 0)
-		{
-			printf("thread create error!\n"); // TODO: error handling
-		}
+			return (printf("thread create error!\n"), 1);
 		i++;
 	}
 	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
-	{
-			printf("thread create error!\n"); // TODO: error handling
-	}
+		return (printf("thread create error!\n"), 1);
 	i = 0;
 	while (i < data->nbr_philos)
 	{
 		if (pthread_join(data->philos[i++].thread, NULL) != 0)
-			printf("thread create error!\n"); // TODO: error handling
+			return (printf("thread create error!\n"), 1);
 	}
+	return (0);
 }

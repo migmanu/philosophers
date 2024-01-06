@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 18:31:39 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:58:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int		check_args(int argc, char *argv[]);
 int		ft_atoi(const char *str);
 int		type_check(char c);
 // initiate_data.c
-void	initiate_data(t_data *data, int argc, char *argv[]);
+int		initiate_data(t_data *data, int argc, char *argv[]);
 // start_threads.c
-void	start_threads(t_data *data);
+int		start_threads(t_data *data);
 // monitor.c
 void	*monitor_routine(void *ptr);
 void	check_starved(t_philos *philo);
