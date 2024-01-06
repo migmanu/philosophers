@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/05 18:55:23 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:31:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,5 @@ void	check_starved(t_philos *philo);
 size_t	get_time(void);
 void	ft_usleep(size_t time);
 void	print_message(t_philos *philo, char *str, char *CLR);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 #endif
