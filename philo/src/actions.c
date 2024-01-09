@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 18:29:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:16:24 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	hold_forks(t_philos *philo)
 void	eat(t_philos *philo)
 {
 	hold_forks(philo);
+	if (philo->meals == *(philo->nbr_times_to_eat))
+	{
+		print_message(philo, "is full", YELLOW);
+		return ;
+	}
 	pthread_mutex_lock(&(philo->eating));
 	print_message(philo, "is eating", GREEN);
 	philo->last_meal = get_time();

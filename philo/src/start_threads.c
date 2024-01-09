@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 19:06:18 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:06:05 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*philo_routine(void *ptr)
 	t_philos	*philo;
 
 	philo = (t_philos *)ptr;
-	while (*(philo->dead) != 1 && philo->meals < philo->nbr_times_to_eat)
+	while (*(philo->dead) != 1)
 	{
 		if (*(philo->dead) != 1)
 			eat(philo);
@@ -53,5 +53,7 @@ int	start_threads(t_data *data)
 		if (pthread_join(data->philos[i++].thread, NULL) != 0)
 			return (printf("thread create error!\n"), 1);
 	}
+	if (pthread_join(monitor, NULL) != 0)
+		return (printf("thread create error!\n"), 1);
 	return (0);
 }
