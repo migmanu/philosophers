@@ -6,21 +6,25 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2023/10/29 19:05:29 by migmanu          ###   ########.fr        #
+#    Updated: 2024/01/09 13:15:57 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
-SRCS_DIR = ./src
-SRCS = $(wildcard $(SRCS_DIR)/*.c)
-# SRCS += $(wildcard $(SRCS_DIR)/main.c)
+SRCS_DIR = ./src_bonus/
+FILES = main_bonus.c actions_bonus.c ft_atoi_bonus.c \
+		start_threads_bonus.c check_args_bonus.c initiate_bonus.c \
+		monitor_bonus.c utils_bonus.c
 
-OBJ_FILES = $(patsubst %.c, %.o, $(SRCS))
+SRCS = $(addprefix $(SRCS_DIR), $(FILES))
+
+OBJ_DIR = ./obj/
+OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 CFLAGS = -Wall -Werror -Wextra -pthread -g
 
 # COMPILATION
-NAME = philosophers
+NAME = philosophers_bonus
 CC = cc
 RM = rm -f
 
@@ -40,12 +44,13 @@ $(NAME): $(OBJ_FILES)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ_FILES)
 	@echo $(GREEN) "OK COMPILED" $(EOC)
 
-%.o: %.c
+$(OBJ_DIR)%.o: $(SRCS_DIR)%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo $(RED) "Cleaning..." $(EOC)
-	@$(RM) $(OBJ_FILES)
+	@echo $(RED) "Cleaning $(NAME)..." $(EOC)
+	@$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	@echo $(PURPLE) "Full Cleaning...🧹" $(EOC)
