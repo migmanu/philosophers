@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 18:21:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:35:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ typedef struct s_philos
 
 typedef struct s_data
 {
-	t_philos		philos[200];
-	pthread_mutex_t	forks[200];
+	t_philos		*philos;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	printing;
 	int				nbr_philos;
 	int				nbr_times_to_eat;

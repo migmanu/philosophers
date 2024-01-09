@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2023/11/05 17:04:26 by migmanu          ###   ########.fr       */
+/*   Updated: 2024/01/09 19:43:25 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,10 @@ int	check_args(int argc, char *argv[])
 	}
 	if (ft_atoi(argv[1]) > 200)
 	{
-		printf("Maximum number of philosophers allowed is 200\n");
-		exit(ERROR);
+		printf("%sMaximum number of philosophers suggested is 200.\
+		\n%sProgram will start shortly...\n",
+			RED, DEFAULT);
+		ft_usleep(10000);
 	}
 	return (0);
 }
