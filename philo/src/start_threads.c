@@ -6,28 +6,34 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 17:06:05 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 22:56:53 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
+
+int	check_dead(t_philos *philo)
+{
+	pthread_mutex_lock(philo->dead_check);
+	if (*(philo->dead) == 1)
+	{
+		pthread_mutex_unlock(philo->dead_check);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->dead_check);
+	return (0);
+}
 
 void	*philo_routine(void *ptr)
 {
 	t_philos	*philo;
 
 	philo = (t_philos *)ptr;
-	while (*(philo->dead) != 1)
+	while (check_dead(philo) != 1)
 	{
-		if (*(philo->dead) != 1)
-			eat(philo);
-		if (*(philo->dead) != 1)
-			p_sleep(philo);
-		if (*(philo->dead) != 1)
-			think(philo);
-		if (*(philo->dead) == 1)
-			return (ptr);
-		ft_usleep(1);
+		eat(philo);
+		p_sleep(philo);
+		think(philo);
 	}
 	return (ptr);
 }
@@ -55,5 +61,7 @@ int	start_threads(t_data *data)
 	}
 	if (pthread_join(monitor, NULL) != 0)
 		return (printf("thread create error!\n"), 1);
+	free(data->philos);
+	free(data->forks);
 	return (0);
 }

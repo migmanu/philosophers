@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/09 19:39:27 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:56:04 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	initiate_philos(t_data *data, char *argv[], int i)
 		}
 		data->philos[i].nbr_times_to_eat = &(data->nbr_times_to_eat);
 		data->philos[i].printing = &(data->printing);
+		data->philos[i].dead_check = &(data->dead_check);
 		data->philos[i].dead = &(data->dead);
 		data->philos[i].die_time = ft_atoi(argv[2]);
 		data->philos[i].eat_time = ft_atoi(argv[3]);
@@ -64,6 +65,11 @@ int	initiate_data(t_data *data, int argc, char *argv[])
 		data->nbr_times_to_eat = ft_atoi(argv[5]);
 	data->dead = 0;
 	if (pthread_mutex_init(&(data->printing), NULL) != 0)
+	{
+		printf("mutex init error!\n");
+		return (1);
+	}
+	if (pthread_mutex_init(&(data->dead_check), NULL) != 0)
 	{
 		printf("mutex init error!\n");
 		return (1);

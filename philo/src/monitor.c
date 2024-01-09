@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/09 18:09:55 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 23:04:32 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,50 @@ int	check_full(t_data *data)
 	while (i < data->nbr_philos)
 	{
 		if (data->philos[i].meals < data->nbr_times_to_eat)
+		{
 			return (0);
+		}
 		i++;
 	}
 	print_message(&(data->philos[1]), "all philosophers ate!", YELLOW);
+	pthread_mutex_lock(&(data->dead_check));
 	data->dead = 1;
+	pthread_mutex_unlock(&(data->dead_check));
 	return (1);
+}
+
+int	check_time(t_data *data, int i)
+{
+	if (get_time() - data->philos[i].last_meal > data->philos[i].die_time)
+	{
+		print_message(&(data->philos[i]), "died!", RED);
+		pthread_mutex_lock(&(data->dead_check));
+		data->dead = 1;
+		pthread_mutex_unlock(&(data->dead_check));
+		return (1);
+	}
+	return (0);
 }
 
 void	*monitor_routine(void *ptr)
 {
-	size_t	curr_time;
 	t_data	*data;
 	int		i;
 
 	data = (t_data *)ptr;
-	i = 1;
-	while (data->dead != 1)
+	i = 0;
+	while (1)
 	{
-		check_full(data);
-		curr_time = get_time();
-		if (curr_time - data->philos[i].last_meal > data->philos[i].die_time)
+		pthread_mutex_lock(&(data->philos[i].eating));
+		if (check_time(data, i) == 1 || check_full(data) == 1)
 		{
-			pthread_mutex_lock(&(data->philos[i].eating));
-			data->dead = 1;
-			print_message(&(data->philos[i]), "died!", RED);
-			ft_usleep(10);
-			pthread_mutex_unlock(&(data->philos[i]).eating);
+			pthread_mutex_unlock(&(data->philos[i].eating));
 			return (NULL);
 		}
+		pthread_mutex_unlock(&(data->philos[i].eating));
 		i++;
 		if (i == data->nbr_philos)
-			i = 1;
+			i = 0;
 	}
 	return (ptr);
 }
