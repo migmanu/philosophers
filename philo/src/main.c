@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 18:57:20 by jmigoya-         ###   ########.fr       */
+/*   Created: 2024/01/09 18:27:45 by jmigoya-          #+#    #+#             */
+/*   Updated: 2024/01/09 19:29:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ int	main(int argc, char *argv[])
 
 	check_args(argc, argv);
 	if (initiate_data(&data, argc, argv) == 1)
+	{
 		return (1);
+	}
+	if (data.nbr_philos == 1)
+	{
+		one_philo(&data);
+		return (0);
+	}
 	start_threads(&data);
 	return (0);
 }

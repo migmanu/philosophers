@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 17:11:13 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:21:37 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_data
 void	think(t_philos *philo);
 void	p_sleep(t_philos *philo);
 void	eat(t_philos *philo);
+void	one_philo(t_data *data);
 // check_args.c
 int		check_args(int argc, char *argv[]);
 // ft_atoi.c

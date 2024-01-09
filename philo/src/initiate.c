@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/09 17:22:48 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:11:57 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	initiate_data(t_data *data, int argc, char *argv[])
 		data->nbr_times_to_eat = -1;
 	else
 		data->nbr_times_to_eat = ft_atoi(argv[5]);
-	printf("nbr times to eat %d\n", data->nbr_times_to_eat);
 	data->dead = 0;
 	if (pthread_mutex_init(&(data->printing), NULL) != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 19:02:39 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:21:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_message(t_philos *philo, char *str, char *CLR)
 	}
 	if (CLR != NULL)
 		printf("%s", CLR);
-	printf("%lu | %d %s\n", get_time(), philo->id, str);
+	printf("%lu | %d %s\n", get_time() % 1000000, philo->id, str);
 	printf(DEFAULT);
 	pthread_mutex_unlock(philo->printing);
 }
