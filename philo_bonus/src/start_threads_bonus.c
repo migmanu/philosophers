@@ -6,28 +6,34 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 13:06:19 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:08:31 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include_bonus/philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
+
+int	check_dead(t_philos *philo)
+{
+	pthread_mutex_lock(philo->dead_check);
+	if (*(philo->dead) == 1)
+	{
+		pthread_mutex_unlock(philo->dead_check);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->dead_check);
+	return (0);
+}
 
 void	*philo_routine(void *ptr)
 {
 	t_philos	*philo;
 
 	philo = (t_philos *)ptr;
-	while (*(philo->dead) != 1 && philo->meals < philo->nbr_times_to_eat)
+	while (check_dead(philo) != 1)
 	{
-		if (*(philo->dead) != 1)
-			eat(philo);
-		if (*(philo->dead) != 1)
-			p_sleep(philo);
-		if (*(philo->dead) != 1)
-			think(philo);
-		if (*(philo->dead) == 1)
-			return (ptr);
-		ft_usleep(1);
+		eat(philo);
+		p_sleep(philo);
+		think(philo);
 	}
 	return (ptr);
 }
@@ -53,5 +59,9 @@ int	start_threads(t_data *data)
 		if (pthread_join(data->philos[i++].thread, NULL) != 0)
 			return (printf("thread create error!\n"), 1);
 	}
+	if (pthread_join(monitor, NULL) != 0)
+		return (printf("thread create error!\n"), 1);
+	free(data->philos);
+	free(data->forks);
 	return (0);
 }

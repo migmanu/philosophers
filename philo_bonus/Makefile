@@ -6,22 +6,21 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/09 13:15:57 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/10 19:07:03 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
-SRCS_DIR = ./src_bonus/
-FILES = main_bonus.c actions_bonus.c ft_atoi_bonus.c \
-		start_threads_bonus.c check_args_bonus.c initiate_bonus.c \
-		monitor_bonus.c utils_bonus.c
+SRCS_DIR = ./src/
+FILES = main_bonus.c actions_bonus.c ft_atoi_bonus.c start_threads_bonus.c \
+		check_args_bonus.c initiate_bonus.c monitor_bonus.c utils_bonus.c
 
 SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 
 OBJ_DIR = ./obj/
 OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-CFLAGS = -Wall -Werror -Wextra -pthread -g
+CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread -g
 
 # COMPILATION
 NAME = philosophers_bonus

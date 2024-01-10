@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/06 18:58:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:56:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,24 @@ typedef struct s_philos
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*printing;
+	pthread_mutex_t	*dead_check;
 	pthread_mutex_t	eating;
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
+	int				*nbr_times_to_eat;
 	size_t			last_meal;
 	int				meals;
-	int				nbr_times_to_eat;
 }	t_philos;
 
 typedef struct s_data
 {
-	t_philos		philos[200];
-	pthread_mutex_t	forks[200];
+	t_philos		*philos;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	printing;
+	pthread_mutex_t	dead_check;
 	int				nbr_philos;
+	int				nbr_times_to_eat;
 	int				dead;
 }	t_data;
 
@@ -73,6 +76,7 @@ typedef struct s_data
 void	think(t_philos *philo);
 void	p_sleep(t_philos *philo);
 void	eat(t_philos *philo);
+void	one_philo(t_data *data);
 // check_args.c
 int		check_args(int argc, char *argv[]);
 // ft_atoi.c
@@ -82,6 +86,7 @@ int		type_check(char c);
 int		initiate_data(t_data *data, int argc, char *argv[]);
 // start_threads.c
 int		start_threads(t_data *data);
+int		check_dead(t_philos *philo);
 // monitor.c
 void	*monitor_routine(void *ptr);
 void	check_starved(t_philos *philo);

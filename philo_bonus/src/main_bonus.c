@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 18:16:51 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 13:06:05 by jmigoya-         ###   ########.fr       */
+/*   Created: 2024/01/09 18:27:45 by jmigoya-          #+#    #+#             */
+/*   Updated: 2024/01/10 19:08:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include_bonus/philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 int	main(int argc, char *argv[])
 {
@@ -18,7 +18,14 @@ int	main(int argc, char *argv[])
 
 	check_args(argc, argv);
 	if (initiate_data(&data, argc, argv) == 1)
+	{
 		return (1);
+	}
+	if (data.nbr_philos == 1)
+	{
+		one_philo(&data);
+		return (0);
+	}
 	start_threads(&data);
 	return (0);
 }

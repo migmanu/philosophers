@@ -6,11 +6,11 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 13:06:35 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:08:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include_bonus/philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 size_t	get_time(void)
 {
@@ -38,16 +38,12 @@ void	ft_usleep(size_t time)
 
 void	print_message(t_philos *philo, char *str, char *CLR)
 {
-	pthread_mutex_lock(philo->printing);
-	if (*(philo->dead) == 1 && ft_strncmp(str, "died!", 5) != 0)
-	{
-		printf(DEFAULT);
-		pthread_mutex_unlock(philo->printing);
+	if (check_dead(philo) == 1)
 		return ;
-	}
+	pthread_mutex_lock(philo->printing);
 	if (CLR != NULL)
 		printf("%s", CLR);
-	printf("%lu | %d %s\n", get_time(), philo->id, str);
+	printf("%lu | %d %s\n", get_time() % 1000000, philo->id, str);
 	printf(DEFAULT);
 	pthread_mutex_unlock(philo->printing);
 }

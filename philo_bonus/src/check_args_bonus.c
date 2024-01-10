@@ -6,11 +6,11 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 13:05:37 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:07:52 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include_bonus/philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 static int	check_str(int argc, char *argv[])
 {
@@ -69,8 +69,10 @@ int	check_args(int argc, char *argv[])
 	}
 	if (ft_atoi(argv[1]) > 200)
 	{
-		printf("Maximum number of philosophers allowed is 200\n");
-		exit(ERROR);
+		printf("%sMaximum number of philosophers suggested is 200.\
+		\n%sProgram will start shortly...\n",
+			RED, DEFAULT);
+		ft_usleep(10000);
 	}
 	return (0);
 }
