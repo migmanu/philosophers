@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 21:56:16 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:28:00 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/time.h>
 # include <sys/stat.h>
-# include <fcntl.h>
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <string.h>
-# include <pthread.h>
+# include <semaphore.h>
 
 # define DEFAULT "\001\033[0;39m\002"
 # define GRAY "\001\033[1;90m\002"
@@ -45,18 +44,13 @@ enum	e_returns
 
 typedef struct s_philos
 {
-	pthread_t		thread;
+	pid_t			pid;
 	int				id;
 	int				*dead;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*printing;
-	pthread_mutex_t	*dead_check;
-	pthread_mutex_t	eating;
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
-	int				*nbr_times_to_eat;
+	int				nbr_times_to_eat;
 	size_t			last_meal;
 	int				meals;
 }	t_philos;
@@ -64,11 +58,10 @@ typedef struct s_philos
 typedef struct s_data
 {
 	t_philos		*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	printing;
-	pthread_mutex_t	dead_check;
+	pid_t			*philos_pids;
+	sem_t			forks;
 	int				nbr_philos;
-	int				nbr_times_to_eat;
+	int				full_philos;
 	int				dead;
 }	t_data;
 

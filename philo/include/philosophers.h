@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 21:56:16 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/10 20:16:38 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
