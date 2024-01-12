@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/10 20:28:00 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:56:59 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@
 # define MAGENTA "\001\033[1;95m\002"
 # define CYAN "\001\033[1;96m\002"
 # define WHITE "\001\033[1;97m\002"
-
-enum	e_returns
-{
-	ERROR = -1,
-	SUCCESS,
-	FAILURE,
-};
 
 typedef struct s_philos
 {
