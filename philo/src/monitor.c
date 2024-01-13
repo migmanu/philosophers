@@ -6,13 +6,13 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/09 23:04:32 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:10:29 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	check_full(t_data *data)
+int	check_full(t_data *data, int meals)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ int	check_full(t_data *data)
 		return (0);
 	while (i < data->nbr_philos)
 	{
-		if (data->philos[i].meals < data->nbr_times_to_eat)
+		if (meals < data->nbr_times_to_eat)
 		{
 			return (0);
 		}
@@ -51,13 +51,15 @@ void	*monitor_routine(void *ptr)
 {
 	t_data	*data;
 	int		i;
+	int		meals;
 
 	data = (t_data *)ptr;
 	i = 0;
 	while (1)
 	{
 		pthread_mutex_lock(&(data->philos[i].eating));
-		if (check_time(data, i) == 1 || check_full(data) == 1)
+		meals = data->philos[i].meals;
+		if (check_time(data, i) == 1 || check_full(data, meals) == 1)
 		{
 			pthread_mutex_unlock(&(data->philos[i].eating));
 			return (NULL);
