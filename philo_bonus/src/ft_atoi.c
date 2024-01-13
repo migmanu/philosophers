@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_bonus.c                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jmigoya- <jmigoya-@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:31:23 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/10 19:08:00 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/06 19:01:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers_bonus.h"
+#include "../include/philosophers.h"
 
 // returns: 1 if is digit, 2 if is '-', 3 if is space, else 0
 int	type_check(char c)
