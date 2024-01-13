@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   check_args_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:37:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 19:43:25 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:59:45 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "../include/philosophers_bonus.h"
 
 static int	check_str(int argc, char *argv[])
 {
@@ -26,7 +26,7 @@ static int	check_str(int argc, char *argv[])
 			if (type_check(argv[i][c]) != 1)
 			{
 				printf("%s is a wrong argument. Only use numbers!\n", argv[i]);
-				return (ERROR);
+				return (1);
 			}
 			c++;
 		}
@@ -45,7 +45,7 @@ static int	check_values(char *argv[])
 		if (ft_atoi(argv[i]) < 1)
 		{
 			printf("Only number of times philosophers eat can be 0!\n");
-			return (ERROR);
+			return (1);
 		}
 		i++;
 	}
@@ -57,15 +57,15 @@ int	check_args(int argc, char *argv[])
 	if (argc < 5 || argc > 6)
 	{
 		printf("Inputed %d arguments. Must use 4 or 5\n", argc - 1);
-		exit(ERROR);
+		exit(1);
 	}
 	if (check_str(argc, argv) != 0)
 	{
-		exit(ERROR);
+		exit(1);
 	}
 	if (check_values(argv) != 0)
 	{
-		exit(ERROR);
+		exit(1);
 	}
 	if (ft_atoi(argv[1]) > 200)
 	{

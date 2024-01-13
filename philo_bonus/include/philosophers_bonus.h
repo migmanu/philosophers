@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosophers.h                                     :+:      :+:    :+:   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/10 20:16:38 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:59:02 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHERS_H
-# define PHILOSOPHERS_H
+#ifndef PHILOSOPHERS_BONUS_H
+# define PHILOSOPHERS_BONUS_H
 # include <unistd.h>
 # include <sys/types.h>
 # include <sys/time.h>
@@ -35,13 +35,6 @@
 # define CYAN "\001\033[1;96m\002"
 # define WHITE "\001\033[1;97m\002"
 
-enum	e_returns
-{
-	ERROR = -1,
-	SUCCESS,
-	FAILURE,
-};
-
 typedef struct s_philos
 {
 	pthread_t		thread;
@@ -49,7 +42,6 @@ typedef struct s_philos
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*printing;
 	pthread_mutex_t	*dead_check;
 	pthread_mutex_t	eating;
 	size_t			die_time;
@@ -64,7 +56,6 @@ typedef struct s_data
 {
 	t_philos		*philos;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	printing;
 	pthread_mutex_t	dead_check;
 	int				nbr_philos;
 	int				nbr_times_to_eat;

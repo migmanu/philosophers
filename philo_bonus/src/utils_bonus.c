@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 22:04:54 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/13 14:58:17 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philosophers.h"
+#include "../include/philosophers_bonus.h"
 
 size_t	get_time(void)
 {
@@ -40,12 +40,10 @@ void	print_message(t_philos *philo, char *str, char *CLR)
 {
 	if (check_dead(philo) == 1)
 		return ;
-	pthread_mutex_lock(philo->printing);
 	if (CLR != NULL)
 		printf("%s", CLR);
 	printf("%lu | %d %s\n", get_time() % 1000000, philo->id, str);
 	printf(DEFAULT);
-	pthread_mutex_unlock(philo->printing);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
