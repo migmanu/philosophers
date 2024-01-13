@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/09 22:04:54 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:13:47 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_usleep(size_t time)
 	start = get_time();
 	while ((get_time() - start) < time)
 	{
-		usleep(500);
+		usleep(200);
 	}
 	return ;
 }
