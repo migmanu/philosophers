@@ -6,13 +6,14 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/13 14:55:57 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:16:36 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
 
-int	check_full(t_data *data)
+/*
+int	check_full(t_data *data, int meals)
 {
 	int	i;
 
@@ -21,7 +22,7 @@ int	check_full(t_data *data)
 		return (0);
 	while (i < data->nbr_philos)
 	{
-		if (data->philos[i].meals < data->nbr_times_to_eat)
+		if (meals < data->nbr_times_to_eat)
 		{
 			return (0);
 		}
@@ -50,6 +51,7 @@ int	check_time(t_data *data, int i)
 void	*monitor_routine(void *ptr)
 {
 	t_data	*data;
+	int		meals;
 	int		i;
 
 	data = (t_data *)ptr;
@@ -57,7 +59,8 @@ void	*monitor_routine(void *ptr)
 	while (1)
 	{
 		pthread_mutex_lock(&(data->philos[i].eating));
-		if (check_time(data, i) == 1 || check_full(data) == 1)
+		meals = data->philos[i].meals;
+		if (check_time(data, i) == 1 || check_full(data, meals) == 1)
 		{
 			pthread_mutex_unlock(&(data->philos[i].eating));
 			return (NULL);
@@ -69,3 +72,4 @@ void	*monitor_routine(void *ptr)
 	}
 	return (ptr);
 }
+*/

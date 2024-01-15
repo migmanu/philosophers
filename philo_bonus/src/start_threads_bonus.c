@@ -6,62 +6,55 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/13 14:56:07 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:29:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
 
-int	check_dead(t_philos *philo)
+void	one_philo(t_data *data)
 {
-	pthread_mutex_lock(philo->dead_check);
-	if (*(philo->dead) == 1)
-	{
-		pthread_mutex_unlock(philo->dead_check);
-		return (1);
-	}
-	pthread_mutex_unlock(philo->dead_check);
-	return (0);
+	print_message(&(data->philos[0]), "took one fork", NULL);
+	ft_usleep(data->philos[0].die_time);
+	print_message(&(data->philos[0]), "died!", RED);
+	free(data->pids);
+	free(data->philos);
 }
 
-void	*philo_routine(void *ptr)
+void	*philo_routine(t_philos *philo)
 {
-	t_philos	*philo;
-
-	philo = (t_philos *)ptr;
-	while (check_dead(philo) != 1)
+	while (1)
 	{
 		eat(philo);
 		p_sleep(philo);
 		think(philo);
 	}
-	return (ptr);
+	free(philo->data->pids);
+	free(philo->data->philos);
+	return (philo);
 }
 
 int	start_threads(t_data *data)
 {
 	int			i;
-	pthread_t	monitor;
 
 	i = 0;
 	while (i < data->nbr_philos)
 	{
-		if (pthread_create(&(data->philos[i].thread), NULL, &philo_routine,
-				&(data->philos[i])) != 0)
-			return (printf("thread create error!\n"), 1);
+		data->pids[i] = fork();
+		data->philos[i].pid = data->pids[i];
+		if (data->pids[i] == 0)
+			philo_routine(&(data->philos[i]));
 		i++;
 	}
-	if (pthread_create(&monitor, NULL, monitor_routine, data) != 0)
-		return (printf("thread create error!\n"), 1);
 	i = 0;
 	while (i < data->nbr_philos)
 	{
-		if (pthread_join(data->philos[i++].thread, NULL) != 0)
-			return (printf("thread create error!\n"), 1);
+		waitpid(data->pids[i], 0, 0);
+		i++;
 	}
-	if (pthread_join(monitor, NULL) != 0)
-		return (printf("thread create error!\n"), 1);
+	//kill_all(data, -1);
 	free(data->philos);
-	free(data->forks);
+	free(data->pids);
 	return (0);
 }

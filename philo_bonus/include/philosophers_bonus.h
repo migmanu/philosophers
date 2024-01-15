@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/13 14:59:02 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:51:47 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <string.h>
 # include <pthread.h>
+# include <semaphore.h>
 
 # define DEFAULT "\001\033[0;39m\002"
 # define GRAY "\001\033[1;90m\002"
@@ -39,11 +40,9 @@ typedef struct s_philos
 {
 	pthread_t		thread;
 	int				id;
+	pid_t			pid;
+	struct s_data	*data;
 	int				*dead;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*dead_check;
-	pthread_mutex_t	eating;
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
@@ -55,18 +54,19 @@ typedef struct s_philos
 typedef struct s_data
 {
 	t_philos		*philos;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	dead_check;
+	pid_t			*pids;
+	sem_t			*forks;
 	int				nbr_philos;
 	int				nbr_times_to_eat;
 	int				dead;
 }	t_data;
 
+
+void	kill_all(t_data *data, int caller_id);
 // actions.c
 void	think(t_philos *philo);
 void	p_sleep(t_philos *philo);
 void	eat(t_philos *philo);
-void	one_philo(t_data *data);
 // check_args.c
 int		check_args(int argc, char *argv[]);
 // ft_atoi.c
@@ -77,6 +77,7 @@ int		initiate_data(t_data *data, int argc, char *argv[]);
 // start_threads.c
 int		start_threads(t_data *data);
 int		check_dead(t_philos *philo);
+void	one_philo(t_data *data);
 // monitor.c
 void	*monitor_routine(void *ptr);
 void	check_starved(t_philos *philo);

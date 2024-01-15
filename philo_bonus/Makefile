@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/10 19:07:03 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/15 17:25:54 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread -g
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 
 # COMPILATION
 NAME = philosophers_bonus
