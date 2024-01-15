@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/15 17:29:15 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:38:41 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	start_threads(t_data *data)
 		waitpid(data->pids[i], 0, 0);
 		i++;
 	}
-	//kill_all(data, -1);
 	free(data->philos);
 	free(data->pids);
 	return (0);

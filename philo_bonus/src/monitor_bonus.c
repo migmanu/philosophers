@@ -6,70 +6,45 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/14 17:16:36 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:39:55 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
 
-/*
-int	check_full(t_data *data, int meals)
+void	kill_all(t_data *data, int caller_id)
 {
 	int	i;
 
 	i = 0;
-	if (data->nbr_times_to_eat == -1)
-		return (0);
 	while (i < data->nbr_philos)
 	{
-		if (meals < data->nbr_times_to_eat)
+		if (i != caller_id)
 		{
-			return (0);
+			kill(data->pids[i], SIGKILL);
 		}
 		i++;
 	}
-	print_message(&(data->philos[1]), "all philosophers ate!", YELLOW);
-	pthread_mutex_lock(&(data->dead_check));
-	data->dead = 1;
-	pthread_mutex_unlock(&(data->dead_check));
-	return (1);
 }
 
-int	check_time(t_data *data, int i)
+void	check_and_wait(t_philos *philo, long time)
 {
-	if (get_time() - data->philos[i].last_meal > data->philos[i].die_time)
-	{
-		print_message(&(data->philos[i]), "died!", RED);
-		pthread_mutex_lock(&(data->dead_check));
-		data->dead = 1;
-		pthread_mutex_unlock(&(data->dead_check));
-		return (1);
-	}
-	return (0);
-}
+	size_t	now;
 
-void	*monitor_routine(void *ptr)
-{
-	t_data	*data;
-	int		meals;
-	int		i;
-
-	data = (t_data *)ptr;
-	i = 0;
-	while (1)
+	now = get_time();
+	if (now - philo->last_meal >= philo->die_time)
 	{
-		pthread_mutex_lock(&(data->philos[i].eating));
-		meals = data->philos[i].meals;
-		if (check_time(data, i) == 1 || check_full(data, meals) == 1)
-		{
-			pthread_mutex_unlock(&(data->philos[i].eating));
-			return (NULL);
-		}
-		pthread_mutex_unlock(&(data->philos[i].eating));
-		i++;
-		if (i == data->nbr_philos)
-			i = 0;
+		print_message(philo, "died!", RED);
+		kill_all(philo->data, philo->id);
+		exit(EXIT_FAILURE);
 	}
-	return (ptr);
+	else if (time != 0 && (now + time) - philo->last_meal >= philo->die_time)
+	{
+		ft_usleep(time);
+		print_message(philo, "died while waiting!", RED);
+		kill_all(philo->data, philo->id);
+		exit(EXIT_FAILURE);
+	}
+	else if (time != 0)
+		ft_usleep(time);
 }
-*/

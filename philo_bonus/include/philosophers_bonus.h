@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/15 16:51:47 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:40:22 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_data
 }	t_data;
 
 
-void	kill_all(t_data *data, int caller_id);
 // actions.c
 void	think(t_philos *philo);
 void	p_sleep(t_philos *philo);
@@ -79,8 +78,8 @@ int		start_threads(t_data *data);
 int		check_dead(t_philos *philo);
 void	one_philo(t_data *data);
 // monitor.c
-void	*monitor_routine(void *ptr);
-void	check_starved(t_philos *philo);
+void	kill_all(t_data *data, int caller_id);
+void	check_and_wait(t_philos *philo, long time);
 // utils.c
 size_t	get_time(void);
 void	ft_usleep(size_t time);
