@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/15 17:39:55 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:44:12 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	kill_all(t_data *data, int caller_id)
 	{
 		if (i != caller_id)
 		{
-			kill(data->pids[i], SIGKILL);
+			kill(data->pids[i], SIGTERM);
 		}
 		i++;
 	}
@@ -36,6 +36,8 @@ void	check_and_wait(t_philos *philo, long time)
 	{
 		print_message(philo, "died!", RED);
 		kill_all(philo->data, philo->id);
+		free(philo->data->philos);
+		free(philo->data->pids);
 		exit(EXIT_FAILURE);
 	}
 	else if (time != 0 && (now + time) - philo->last_meal >= philo->die_time)
@@ -43,6 +45,8 @@ void	check_and_wait(t_philos *philo, long time)
 		ft_usleep(time);
 		print_message(philo, "died while waiting!", RED);
 		kill_all(philo->data, philo->id);
+		free(philo->data->philos);
+		free(philo->data->pids);
 		exit(EXIT_FAILURE);
 	}
 	else if (time != 0)
