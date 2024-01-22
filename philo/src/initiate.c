@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/09 21:56:04 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:20:16 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	initiate_philos(t_data *data, char *argv[], int i)
 			printf("mutex init error!\n");
 			return (1);
 		}
+		data->philos[i].full = 0;
 		data->philos[i].nbr_times_to_eat = &(data->nbr_times_to_eat);
 		data->philos[i].printing = &(data->printing);
 		data->philos[i].dead_check = &(data->dead_check);

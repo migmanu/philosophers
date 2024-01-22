@@ -6,37 +6,40 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/13 15:10:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:44:44 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	check_full(t_data *data, int meals)
+// checks if philo is full. If full sets full to -1 to now count twice
+int	check_full(t_data *data, int i, int *d)
 {
-	int	i;
-
-	i = 0;
 	if (data->nbr_times_to_eat == -1)
-		return (0);
-	while (i < data->nbr_philos)
 	{
-		if (meals < data->nbr_times_to_eat)
-		{
-			return (0);
-		}
-		i++;
+		data->philos[i].full = 0;
+		return (0);
 	}
-	print_message(&(data->philos[1]), "all philosophers ate!", YELLOW);
-	pthread_mutex_lock(&(data->dead_check));
-	data->dead = 1;
-	pthread_mutex_unlock(&(data->dead_check));
-	return (1);
+	if (data->philos[i].full == 1)
+	{
+		*d = *d + 1;
+		data->philos[i].full = -1;
+	}
+	if (*d >= data->nbr_philos)
+	{
+		print_message(&(data->philos[i]), "all philos are full!", YELLOW);
+		pthread_mutex_lock(&(data->dead_check));
+		data->dead = 1;
+		pthread_mutex_unlock(&(data->dead_check));
+		return (1);
+	}
+	return (0);
 }
 
 int	check_time(t_data *data, int i)
 {
-	if (get_time() - data->philos[i].last_meal > data->philos[i].die_time)
+	if (data->philos[i].full == 0 
+		&& get_time() - data->philos[i].last_meal > data->philos[i].die_time)
 	{
 		print_message(&(data->philos[i]), "died!", RED);
 		pthread_mutex_lock(&(data->dead_check));
@@ -51,15 +54,15 @@ void	*monitor_routine(void *ptr)
 {
 	t_data	*data;
 	int		i;
-	int		meals;
+	int		d;
 
 	data = (t_data *)ptr;
+	d = 0;
 	i = 0;
 	while (1)
 	{
 		pthread_mutex_lock(&(data->philos[i].eating));
-		meals = data->philos[i].meals;
-		if (check_time(data, i) == 1 || check_full(data, meals) == 1)
+		if (check_time(data, i) == 1 || check_full(data, i, &d) == 1)
 		{
 			pthread_mutex_unlock(&(data->philos[i].eating));
 			return (NULL);
