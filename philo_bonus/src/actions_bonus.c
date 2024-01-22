@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 16:36:27 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/15 17:39:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:00:36 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	hold_forks(t_philos *philo)
 {
 	sem_wait(philo->data->forks);
 	print_message(philo, "picked first fork", NULL);
+	check_and_wait(philo, 0);
 	sem_wait(philo->data->forks);
 	print_message(philo, "picked second fork", NULL);
 }
@@ -42,22 +43,18 @@ void	drop_forks(t_philos *philo)
 
 void	eat(t_philos *philo)
 {
-	check_and_wait(philo, 0);
-	if (philo->id % 2 == 0)
-	{
-		ft_usleep(1);
-	}
 	hold_forks(philo);
-	check_and_wait(philo, 0);
 	if (philo->meals == *(philo->nbr_times_to_eat))
 	{
 		print_message(philo, "is full", YELLOW);
 		drop_forks(philo);
 		exit(0);
 	}
+	pthread_mutex_lock(&(philo->dead_check));
 	print_message(philo, "is eating", GREEN);
 	philo->last_meal = get_time();
 	philo->meals++;
+	pthread_mutex_unlock(&(philo->dead_check));
 	check_and_wait(philo, philo->eat_time);
 	print_message(philo, "ate", CYAN);
 	drop_forks(philo);

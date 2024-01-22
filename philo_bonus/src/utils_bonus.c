@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/15 15:21:56 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:48:21 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ void	ft_usleep(size_t time)
 
 void	print_message(t_philos *philo, char *str, char *CLR)
 {
-	/*
-	if (check_dead(philo) == 1)
-		return ;
-	*/
 	if (CLR != NULL)
-		printf("%s", CLR);
-	printf("%lu | %d %s\n", get_time() % 1000000, philo->id, str);
-	printf(DEFAULT);
+	{
+		printf("%s%lu | %d %s\n%s", CLR,
+			get_time() % 1000000, philo->id, str, DEFAULT);
+	}
+	else
+	{
+		printf("%s%lu | %d %s\n%s", DEFAULT,
+			get_time() % 1000000, philo->id, str, DEFAULT);
+	}
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

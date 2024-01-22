@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/15 15:01:35 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:38:26 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	initiate_philos(t_data *data, char *argv[], int i)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
-		data->philos[i].dead = &(data->dead);
+		data->philos[i].dead = 0;
 		data->philos[i].die_time = ft_atoi(argv[2]);
 		data->philos[i].eat_time = ft_atoi(argv[3]);
 		data->philos[i].sleep_time = ft_atoi(argv[4]);
@@ -35,7 +35,6 @@ int	initiate_data(t_data *data, int argc, char *argv[])
 		data->nbr_times_to_eat = -1;
 	else
 		data->nbr_times_to_eat = ft_atoi(argv[5]);
-	data->dead = 0;
 	data->philos = malloc(sizeof(t_philos) * data->nbr_philos);
 	data->pids = malloc(sizeof(pid_t) * data->nbr_philos);
 	sem_unlink("forks"); // TODO: error handling

@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:27:45 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/13 14:55:50 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:42:36 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int argc, char *argv[])
 		one_philo(&data);
 		return (0);
 	}
-	start_threads(&data);
+	start_philos(&data);
 	return (0);
 }

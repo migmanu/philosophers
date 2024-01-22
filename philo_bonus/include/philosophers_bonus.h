@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/15 17:40:22 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:38:06 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@
 
 typedef struct s_philos
 {
-	pthread_t		thread;
+	pthread_t		monitor;
+	pthread_mutex_t	dead_check;
 	int				id;
 	pid_t			pid;
 	struct s_data	*data;
-	int				*dead;
+	int				dead;
 	size_t			die_time;
 	size_t			eat_time;
 	size_t			sleep_time;
@@ -58,9 +59,7 @@ typedef struct s_data
 	sem_t			*forks;
 	int				nbr_philos;
 	int				nbr_times_to_eat;
-	int				dead;
 }	t_data;
-
 
 // actions.c
 void	think(t_philos *philo);
@@ -74,12 +73,12 @@ int		type_check(char c);
 // initiate_data.c
 int		initiate_data(t_data *data, int argc, char *argv[]);
 // start_threads.c
-int		start_threads(t_data *data);
+int		start_philos(t_data *data);
 int		check_dead(t_philos *philo);
 void	one_philo(t_data *data);
 // monitor.c
 void	kill_all(t_data *data, int caller_id);
-void	check_and_wait(t_philos *philo, long time);
+int		check_and_wait(t_philos *philo, long time);
 // utils.c
 size_t	get_time(void);
 void	ft_usleep(size_t time);
