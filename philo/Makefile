@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/09 22:35:55 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/22 11:34:51 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ OBJ_DIR = ./obj/
 OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread -g
+#-fsanitize=thread
+#-fsanitize=address
 
 # COMPILATION
 NAME = philosophers
