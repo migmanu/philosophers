@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/22 13:03:59 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:26:46 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,9 @@ void	one_philo(t_data *data)
 	ft_usleep(data->philos[0].die_time);
 	print_message(&(data->philos[0]), "died!", RED);
 	free(data->pids);
+	data->pids = NULL;
 	free(data->philos);
-}
-
-void	*monitor_routine(void *ptr)
-{
-	t_philos	*philo;
-	size_t		now;
-
-	philo = (t_philos *)ptr;
-	while (1)
-	{
-		pthread_mutex_lock(&(philo->dead_check));
-		now = get_time();
-		if (now - philo->last_meal > philo->die_time)
-		{
-			print_message(philo, "died!", RED);
-			kill_all(philo->data, philo->id);
-			free(philo->data->philos);
-			free(philo->data->pids);
-			exit(EXIT_FAILURE);
-			philo->dead = 1;
-		}
-		pthread_mutex_unlock(&(philo->dead_check));
-		//printf("%lu | philo %d check done, gonna wait %lu\n", get_time(),
-		//	philo->id, philo->die_time);
-		ft_usleep(1);
-	}
-	return (ptr);
+	data->philos = NULL;
 }
 
 void	*philo_routine(t_philos *philo)
@@ -72,7 +47,9 @@ void	*philo_routine(t_philos *philo)
 		return (NULL);
 	}
 	free(philo->data->pids);
+	philo->data->pids = NULL;
 	free(philo->data->philos);
+	philo->data->philos = NULL;
 	return (philo);
 }
 
@@ -96,6 +73,8 @@ int	start_philos(t_data *data)
 		i++;
 	}
 	free(data->philos);
+	data->philos = NULL;
 	free(data->pids);
+	data->pids = NULL;
 	return (0);
 }

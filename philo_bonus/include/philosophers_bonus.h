@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/22 12:38:06 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:44:29 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 typedef struct s_philos
 {
 	pthread_t		monitor;
-	pthread_mutex_t	dead_check;
+	sem_t			*dead_check;
 	int				id;
 	pid_t			pid;
 	struct s_data	*data;
@@ -78,7 +78,7 @@ int		check_dead(t_philos *philo);
 void	one_philo(t_data *data);
 // monitor.c
 void	kill_all(t_data *data, int caller_id);
-int		check_and_wait(t_philos *philo, long time);
+void	*monitor_routine(void *ptr);
 // utils.c
 size_t	get_time(void);
 void	ft_usleep(size_t time);

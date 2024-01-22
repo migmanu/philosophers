@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 19:27:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/22 12:53:33 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:48:28 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,31 @@ void	kill_all(t_data *data, int caller_id)
 	}
 }
 
-int	check_and_wait(t_philos *philo, long time)
+void	*monitor_routine(void *ptr)
 {
+	t_philos	*philo;
+	size_t		now;
 
-	ft_usleep(time);
-	if (philo->dead == 1)
-		return (1);
-	/*
-	size_t	now;
-	now = get_time();
-	pthread_mutex_lock(&(philo->dead_check));
-	if (philo->dead == 1)
+	philo = (t_philos *)ptr;
+	while (1)
 	{
-		print_message(philo, "died!", RED);
-		kill_all(philo->data, philo->id);
-		free(philo->data->philos);
-		free(philo->data->pids);
-		exit(EXIT_FAILURE);
-		return (1);
+		sem_wait(philo->dead_check);
+		now = get_time();
+		if (now - philo->last_meal > philo->die_time)
+		{
+			print_message(philo, "died!", RED);
+			kill_all(philo->data, philo->id);
+			sem_post(philo->dead_check);
+			if (pthread_join(philo->monitor, NULL) != 0)
+				print_message(philo, "pthread error", RED);
+			free(philo->data->pids);
+			philo->data->pids = NULL;
+			free(philo->data->philos);
+			philo->data->philos = NULL;
+			exit(EXIT_FAILURE);
+		}
+		sem_post(philo->dead_check);
+		ft_usleep(1);
 	}
-	pthread_mutex_unlock(&(philo->dead_check));
-	else if (time != 0 && (now + time) - philo->last_meal >= philo->die_time)
-	{
-		ft_usleep(time);
-		print_message(philo, "died while waiting!", RED);
-		kill_all(philo->data, philo->id);
-		free(philo->data->philos);
-		free(philo->data->pids);
-		exit(EXIT_FAILURE);
-		return (1);
-	}
-	else if (time != 0)
-		ft_usleep(time);
-	*/
-	return (0);
+	return (ptr);
 }
