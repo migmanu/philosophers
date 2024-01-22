@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/22 11:34:51 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/22 14:55:56 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = $(addprefix $(SRCS_DIR), $(FILES))
 OBJ_DIR = ./obj/
 OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
-CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=thread -g
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 #-fsanitize=thread
 #-fsanitize=address
 
