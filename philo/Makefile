@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/22 16:44:24 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/24 15:53:24 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra -pthread -g
 #-fsanitize=address
 
 # COMPILATION
-NAME = philosophers
+NAME = philo
 CC = cc
 RM = rm -f
 

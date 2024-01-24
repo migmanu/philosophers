@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 18:22:44 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/22 14:44:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:32:57 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 	t_philos		*philos;
 	pid_t			*pids;
 	sem_t			*forks;
+	sem_t			*print;
 	int				nbr_philos;
 	int				nbr_times_to_eat;
 }	t_data;

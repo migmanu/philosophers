@@ -6,11 +6,12 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/24 15:50:15 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:40:20 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
+#include <semaphore.h>
 #include <stdlib.h>
 
 int	initiate_philos(t_data *data, char *argv[], int i)
@@ -42,6 +43,8 @@ int	initiate_data(t_data *data, int argc, char *argv[])
 	data->pids = malloc(sizeof(pid_t) * data->nbr_philos);
 	sem_unlink("forks");
 	data->forks = sem_open("forks", O_CREAT, 0600, data->nbr_philos);
+	sem_unlink("print");
+	data->print = sem_open("print", O_CREAT, 0600, 1);
 	if (data->philos == NULL || data->forks == SEM_FAILED)
 		return (1);
 	if (initiate_philos(data, argv, -1) == 1)

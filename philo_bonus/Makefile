@@ -6,7 +6,7 @@
 #    By: migmanu <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 19:24:44 by migmanu           #+#    #+#              #
-#    Updated: 2024/01/22 14:58:25 by jmigoya-         ###   ########.fr        #
+#    Updated: 2024/01/24 16:39:27 by jmigoya-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ_FILES = $(patsubst $(SRCS_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 CFLAGS = -Wall -Werror -Wextra -pthread -g
 
 # COMPILATION
-NAME = philosophers_bonus
+NAME = philo_bonus
 CC = cc
 RM = rm -f
 

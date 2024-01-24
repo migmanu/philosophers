@@ -6,11 +6,12 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 20:42:56 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/22 12:48:21 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:33:11 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers_bonus.h"
+#include <semaphore.h>
 
 size_t	get_time(void)
 {
@@ -38,6 +39,7 @@ void	ft_usleep(size_t time)
 
 void	print_message(t_philos *philo, char *str, char *CLR)
 {
+	sem_wait(philo->data->print);
 	if (CLR != NULL)
 	{
 		printf("%s%lu | %d %s\n%s", CLR,
@@ -48,6 +50,7 @@ void	print_message(t_philos *philo, char *str, char *CLR)
 		printf("%s%lu | %d %s\n%s", DEFAULT,
 			get_time() % 1000000, philo->id, str, DEFAULT);
 	}
+	sem_post(philo->data->print);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)

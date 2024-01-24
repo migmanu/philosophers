@@ -6,7 +6,7 @@
 /*   By: migmanu <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 19:09:39 by migmanu           #+#    #+#             */
-/*   Updated: 2024/01/22 14:26:46 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:21:39 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ void	*philo_routine(t_philos *philo)
 		print_message(philo, "pthread error", RED);
 		return (NULL);
 	}
-	free(philo->data->pids);
-	philo->data->pids = NULL;
-	free(philo->data->philos);
-	philo->data->philos = NULL;
 	return (philo);
 }
 
