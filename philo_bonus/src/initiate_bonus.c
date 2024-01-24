@@ -6,7 +6,7 @@
 /*   By: jmigoya- <jmigoya-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 21:05:14 by jmigoya-          #+#    #+#             */
-/*   Updated: 2024/01/22 14:54:29 by jmigoya-         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:50:15 by jmigoya-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,7 @@ int	initiate_philos(t_data *data, char *argv[], int i)
 {
 	while (++i < data->nbr_philos)
 	{
-		if (sem_unlink("dead_check") < 0)
-		{
-			printf("sem error!\n");
-			exit(EXIT_FAILURE);
-		}
+		sem_unlink("dead_check");
 		data->philos[i].dead_check = sem_open("dead_check", O_CREAT, 0600, 1);
 		data->philos[i].id = i + 1;
 		data->philos[i].data = data;
@@ -44,11 +40,7 @@ int	initiate_data(t_data *data, int argc, char *argv[])
 		data->nbr_times_to_eat = ft_atoi(argv[5]);
 	data->philos = malloc(sizeof(t_philos) * data->nbr_philos);
 	data->pids = malloc(sizeof(pid_t) * data->nbr_philos);
-	if (sem_unlink("forks") < 0)
-	{
-		printf("sem error!\n");
-		exit(EXIT_FAILURE);
-	}
+	sem_unlink("forks");
 	data->forks = sem_open("forks", O_CREAT, 0600, data->nbr_philos);
 	if (data->philos == NULL || data->forks == SEM_FAILED)
 		return (1);
